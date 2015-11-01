@@ -31,7 +31,7 @@ with session() as c:
         
         fetchcount, fetchweight, postcount, friends = (0,0,0,0)
         try:
-            fetchcount = int(doc('span.stat_fetchcount > span.val').text().strip('x'))
+            fetchcount = int(doc('span.stat_fetchcount > span.val').text().strip('x').replace('.',''))
         except Exception:
             pass
         
@@ -41,12 +41,12 @@ with session() as c:
             pass
         
         try:
-            postcount = int(doc('span.stat_postcount > span.val').text())
+            postcount = int(doc('span.stat_postcount > span.val').text().replace('.',''))
         except Exception:
             pass
         
         try:
-            friends = int(doc('div.infos:nth-child(1) > p:nth-child(1)').text().split()[-2])
+            friends = int(doc('div.infos:nth-child(1) > p:nth-child(1)').text().split()[-2].replace('.',''))
         except Exception:
             pass
 
