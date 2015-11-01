@@ -5,9 +5,22 @@ myapp.controller("OverviewCtrl",function($scope,$http){
         var User = resp.data.entries;
         console.log(User);
         $scope.data = User.slice(0,10);
-        $scope.highchartsNG.series = [{name:"Foodsaver Münchens",data:User.map(function (el) {
+        var fetchcount_sum = 0;
+        var fetchcount_data = User.map(function (el) {
+            fetchcount_sum += el.entries[0].fetchcount;
             return el.entries[0].fetchcount;
-        })}]
+        }).sort(function(a,b){return b-a});
+        var quantil_80;
+        fetchcount_sum *= 0.8;
+        fetchcount_data.some(function (c,i) {
+            fetchcount_sum -= c;
+            if(fetchcount_sum<=0){
+                quantil_80 = i;
+                return true;
+            }
+        })
+        $scope.quantil_80 = quantil_80;
+        $scope.highchartsNG.series = [{name:"Foodsaver Münchens",data:fetchcount_data}]
     },function(resp){
         console.log("Error retrieving overview data")
     })
