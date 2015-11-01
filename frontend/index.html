@@ -4,22 +4,22 @@
     </head>
     <body>
         <h1>Foodsaver Top10 für München</h1>
+        <div ng-controller="OverviewCtrl">
+            <table>
+                <tr>
+                    <th>UserID</th>
+                    <th>Abholungen</th>
+                </tr>
+                <tr ng-repeat="user in data">
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.entries[0].fetchcount}}</td>
+                </tr>
+            </table>
 
-        <table ng-controller="OverviewCtrl">
-            <tr>
-                <th>UserID</th>
-                <th>Abholungen</th>
-            </tr>
-            <tr ng-repeat="user in data">
-                <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
-                <td>{{user.entries[0].fetchcount}}</td>
-            </tr>
-        </table>
-
-        <div ng-controller="myctrl">
-            <highchart id="chart1" config="highchartsNG"></highchart>
+            <div>
+                <highchart id="chart1" config="highchartsNG"></highchart>
+            </div>
         </div>
-
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
