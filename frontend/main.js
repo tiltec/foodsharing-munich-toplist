@@ -2,13 +2,11 @@ var myapp = angular.module("munich-toplist",["highcharts-ng"]);
 
 myapp.controller("OverviewCtrl",function($scope,$http){
     $http.get("http://localhost:5000/overview").then(function(resp){
-        //alert("")
-        console.log(resp.data);
-        //var User = resp.data.entries;
-        //console.log(User);
-        //$scope.data = User.slice(0,10);
+        var User = resp.data.entries;
+        console.log(User);
+        $scope.data = User.slice(0,10);
     },function(resp){
-        console.log(resp)
+        console.log("Error retrieving overview data")
     })
 })
 
