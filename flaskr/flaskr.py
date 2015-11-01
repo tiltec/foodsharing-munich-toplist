@@ -6,9 +6,6 @@ from flask import Flask, request, session, g, redirect, url_for, \
      
 DATABASE = '../scraper/foodsharingstats.db'
 DEBUG = True
-SECRET_KEY = 'devkey'
-USERNAME = 'admin'
-PASSWORD = 'default'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
