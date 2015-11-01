@@ -7,12 +7,12 @@
 
         <table ng-controller="OverviewCtrl">
             <tr>
-                <th>User</th>
+                <th>UserID</th>
                 <th>Abholungen</th>
             </tr>
             <tr ng-repeat="user in data">
-                <td><a href="https://foodsharing.de/profile/{{user.id}}">{{user.name}}</a></td>
-                <td>{{user.abholungen}}</td>
+                <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                <td>{{user.entries[0].fetchcount}}</td>
             </tr>
         </table>
 
