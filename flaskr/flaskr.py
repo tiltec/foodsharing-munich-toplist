@@ -27,23 +27,34 @@ def teardown_request(exception):
     if db is not None:
         db.close()
         
-@app.route('/')
-def show_entries():
+def read_stats():
     cur = g.db.execute('select id,date,fetchcount,fetchweight,postcount,friends from munichstats order by date desc')
     entries = [dict(userid=row[0], date=row[1], fetchcount=row[2], fetchweight=row[3], postcount=row[4], friends=row[5]) for row in cur.fetchall()]
+    return entries
+        
+@app.route('/')
+def show_entries():
+    entries = read_stats()    
     return render_template('show_entries.html', entries=entries) 
     
 @app.route('/overview', methods=['GET'])
 def overview():
-    cur = g.db.execute('select id,date,fetchcount,fetchweight,postcount,friends from munichstats order by date desc')
-    entries = [dict(userid=row[0], date=row[1], fetchcount=row[2], fetchweight=row[3], postcount=row[4], friends=row[5]) for row in cur.fetchall()]
+    entries = read_stats()    
     userentries = []
     userids = set([_['userid'] for _ in entries])
     for u in userids:
         userentries.append(
-            {'userid': u,
-             'entries': [e for e in entries if e['userid'] == u]
-             })
+           )
+    userentries.sort(key=lambda e: e['entries'][0]['fetchcount'], reverse=True)
+    return jsonify({'entries': userentries})
+
+@app.route('/user/<int:userid>', methods=['GET'])    
+def user(userid):
+    entries = read_stats()
+    userid = str(userid)
+    userentries = [{'userid': userid,
+             'entries': [e for e in entries if e['userid'] == userid]
+             }]
     return jsonify({'entries': userentries})
     
 if __name__ == '__main__':
