@@ -55,3 +55,9 @@ docs/_build/
 
 # PyBuilder
 target/
+.idea/.name
+.idea/foodsharing-munich-toplist.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
