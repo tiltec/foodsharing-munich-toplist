@@ -15,34 +15,147 @@
                     <td>{{user.entries[0].fetchcount}}</td>
                 </tr>
             </table>
-
-            <h2>Meiste Abholungen letzte Woche</h2>
+   <h1>Statistiken der letzten Woche</h1>
+   <table>
+    <tr>
+        <td>
+            <h2>Abholungen</h2>
             <table>
                 <tr>
                     <th>Platz</th>
                     <th>UserID</th>
                     <th>Abholungen</th>
                 </tr>
-                <tr ng-repeat="user in mostactivelist">
+                <tr ng-repeat="user in fetchcountperweek">
                     <td>{{$index+1}}</td>
                     <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
                     <td>{{user.count}}</td>
                 </tr>
             </table>
-
-            <h2>Freunde gewonnen</h2>
+       </td>
+       
+       <td>
+            <h2>Abholgewicht</h2>
+            <table>
+                <tr>
+                    <th>Platz</th>
+                    <th>UserID</th>
+                    <th>Gewicht</th>
+                </tr>
+                <tr ng-repeat="user in fetchweightperweek">
+                    <td>{{$index+1}}</td>
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </table>
+       </td>
+       
+        <td>
+            <h2>Posts</h2>
+            <table>
+                <tr>
+                    <th>Platz</th>
+                    <th>UserID</th>
+                    <th>Posts</th>
+                </tr>
+                <tr ng-repeat="user in postsperweek">
+                    <td>{{$index+1}}</td>
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </table>
+       </td>
+       
+        <td>
+            <h2>Gewonnene Freunde</h2>
             <table>
                 <tr>
                     <th>Platz</th>
                     <th>UserID</th>
                     <th>Freunde</th>
                 </tr>
-                <tr ng-repeat="user in friendsgained">
+                <tr ng-repeat="user in friendsperweek">
                     <td>{{$index+1}}</td>
                     <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
                     <td>{{user.count}}</td>
                 </tr>
             </table>
+       </td>
+   </tr>
+            
+   </table>
+   
+   
+     <h1>Statistiken des letzten Monats</h1>
+   <table>
+    <tr>
+        <td>
+            <h2>Abholungen</h2>
+            <table>
+                <tr>
+                    <th>Platz</th>
+                    <th>UserID</th>
+                    <th>Abholungen</th>
+                </tr>
+                <tr ng-repeat="user in fetchcountpermonth">
+                    <td>{{$index+1}}</td>
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </table>
+       </td>
+       
+       <td>
+            <h2>Abholgewicht</h2>
+            <table>
+                <tr>
+                    <th>Platz</th>
+                    <th>UserID</th>
+                    <th>Gewicht</th>
+                </tr>
+                <tr ng-repeat="user in fetchweightpermonth">
+                    <td>{{$index+1}}</td>
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </table>
+       </td>
+       
+        <td>
+            <h2>Posts</h2>
+            <table>
+                <tr>
+                    <th>Platz</th>
+                    <th>UserID</th>
+                    <th>Posts</th>
+                </tr>
+                <tr ng-repeat="user in postspermonth">
+                    <td>{{$index+1}}</td>
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </table>
+       </td>
+       
+        <td>
+            <h2>Gewonnene Freunde</h2>
+            <table>
+                <tr>
+                    <th>Platz</th>
+                    <th>UserID</th>
+                    <th>Freunde</th>
+                </tr>
+                <tr ng-repeat="user in friendspermonth">
+                    <td>{{$index+1}}</td>
+                    <td><a href="https://foodsharing.de/profile/{{user.userid}}">{{user.userid}}</a></td>
+                    <td>{{user.count}}</td>
+                </tr>
+            </table>
+       </td>
+   </tr>
+            
+   </table>
+    
             <p>{{quantil_80}} Foodsaver haben 80% aller Abholungen.</p>
             <div>
                 <highchart id="chart1" config="highchartsNG"></highchart>

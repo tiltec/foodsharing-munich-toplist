@@ -3,7 +3,6 @@ var myapp = angular.module("munich-toplist",["highcharts-ng"]);
 myapp.controller("OverviewCtrl",function($scope,$http){
     $http.get("/overview").then(function(resp){
         var User = resp.data.entries;
-        console.log(User);
         $scope.data = User.slice(0,10);
         var fetchcount_sum = 0;
         var fetchcount_data = User.map(function (el) {
@@ -23,17 +22,53 @@ myapp.controller("OverviewCtrl",function($scope,$http){
                     return recent-parseTime(el.date) < msrange;
                 });
         }
-        $scope.mostactivelist = User.map(function (el) {
+        $scope.fetchcountperweek = User.map(function (el) {
             var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*7.1);
             return {count: entries[0].fetchcount-entries.slice(-1)[0].fetchcount,
                     userid: el.userid};
         }).sort(function(a,b){return b.count-a.count}).slice(0,20);
         
-        $scope.friendsgained = User.map(function (el) {
+        $scope.friendsperweek = User.map(function (el) {
             var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*7.1);
             return {count: entries[0].friends-entries.slice(-1)[0].friends,
                     userid: el.userid};
-        }).sort(function(a,b){return b.count-a.count}).slice(0,10);
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
+        
+        $scope.postsperweek = User.map(function (el) {
+            var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*7.1);
+            return {count: entries[0].postcount-entries.slice(-1)[0].postcount,
+                    userid: el.userid};
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
+        
+        $scope.fetchweightperweek = User.map(function (el) {
+            var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*7.1);
+            return {count: entries[0].fetchweight-entries.slice(-1)[0].fetchweight,
+                    userid: el.userid};
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
+        
+        $scope.fetchcountpermonth = User.map(function (el) {
+            var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*31.1);     
+            return {count: entries[0].fetchcount-entries.slice(-1)[0].fetchcount,
+                    userid: el.userid};
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
+        
+        $scope.friendspermonth = User.map(function (el) {
+            var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*31.1);
+            return {count: entries[0].friends-entries.slice(-1)[0].friends,
+                    userid: el.userid};
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
+        
+        $scope.postspermonth = User.map(function (el) {
+            var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*31.1);
+            return {count: entries[0].postcount-entries.slice(-1)[0].postcount,
+                    userid: el.userid};
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
+        
+        $scope.fetchweightpermonth = User.map(function (el) {
+            var entries = getEntriesInDateRange(el.entries, 1000*60*60*24*31.1);
+            return {count: entries[0].fetchweight-entries.slice(-1)[0].fetchweight,
+                    userid: el.userid};
+        }).sort(function(a,b){return b.count-a.count}).slice(0,20);
 
         var quantil_80;
         fetchcount_sum *= 0.8;
