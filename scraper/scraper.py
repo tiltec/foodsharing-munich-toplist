@@ -9,7 +9,7 @@ userids = None
 mail = None
 password = None
 
-with sqlite3.connect(DBNAME_SETTINGS) as con:    
+with sqlite3.connect('/tmp/tilmann/'+DBNAME_SETTINGS) as con:    
    userids = [_[0] for _ in con.execute('select userid from munichusers').fetchall()]
    mail, password = con.execute('select mail,password from foodsharinguser').fetchall()[0]
 
@@ -53,7 +53,7 @@ with session() as c:
         stats.append((userid, datenow, fetchcount, fetchweight, postcount, friends))
 
     
-with sqlite3.connect(DBNAME_STATS) as con:
+with sqlite3.connect('/tmp/tilmann/'+DBNAME_STATS) as con:
     con.execute('create table if not exists munichstats(id, date, fetchcount, fetchweight, postcount, friends)')
     con.executemany('insert into munichstats(id, date, fetchcount, fetchweight, postcount, friends) values (?, ?, ?, ?, ?, ?)', stats)
 
